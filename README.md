@@ -42,7 +42,7 @@ Source: Kaggle ([DPWH Flood Control Projects](https://www.kaggle.com/datasets/bw
 | Average Project Cost | ₱55.37 Million |
 | Regions Covered | All Philippine Regions |
 
-###Key Fields
+### Key Fields
 * Region
 * Province
 * Municipality
@@ -135,6 +135,7 @@ Version Control
 
 ---
 ## Repository Structure
+```
 flood-control-projects-ph/
 │
 ├── data/
@@ -151,6 +152,7 @@ flood-control-projects-ph/
 │   └── Flood_Control_Projects_Ph_preview.png
 │
 └── README.md
+```
 
 ---
 ## Key Insights
