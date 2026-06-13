@@ -76,6 +76,7 @@ Data preparation was performed in Python using Pandas.
 ---
 ## Dashboard Preview
 ![Flood Control Dashboard](images/Flood_Control_Projects_Ph.png)
+View in [Tableau Public](https://public.tableau.com/app/profile/nicanor.jr.peril/viz/FloodControlProjectsinthePhilippines/Dashboard2?publish=yes)
 
 ---
 ## Dashboard Overview
