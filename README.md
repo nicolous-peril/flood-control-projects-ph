@@ -1,164 +1,187 @@
-# Protecting Communities: An Analysis of Philippine Flood Control Investments (2018–2025)
+# DPWH Flood Control Projects in the Philippines
 
-## Overview
-Flooding remains one of the most frequent and costly natural hazards in the Philippines, affecting millions of people each year through damaged homes, disrupted livelihoods, transportation delays, and risks to public safety.
+## Project Overview
 
-To address these challenges, the Philippine government, through the Department of Public Works and Highways (DPWH), invests billions of pesos annually in flood control infrastructure projects. These projects are intended to reduce flood risks, protect communities, and improve disaster resilience across the country.
+This project analyzes publicly available data on Department of Public Works and Highways (DPWH) flood control projects in the Philippines from 2018 to 2025.
 
-At the same time, flood control spending has often been the subject of public discussion and scrutiny. Citizens, researchers, and policymakers have raised questions about where projects are being implemented, how funds are distributed, and whether investments align with areas most vulnerable to flooding.
+Flood control infrastructure is a major public investment area in the Philippines, where flooding regularly affects communities, mobility, livelihoods, and public safety. This project turns a large project-level dataset into a structured analytics story that helps viewers understand where funds are allocated, which regions and provinces receive the largest investments, what types of work are most common, and how project volume compares with funding levels.
 
-This project does not seek to evaluate political decisions or make conclusions about individual projects. Instead, it uses publicly available data to explore patterns in flood control investments and promote greater transparency through data visualization.
+The project has evolved from a single Tableau dashboard into a multi-dashboard Tableau workbook with a five-part Tableau Story designed for presentation and portfolio use.
 
-By transforming project records into an interactive dashboard, this analysis aims to help citizens better understand how public resources are allocated and encourage data-informed conversations about infrastructure, resilience, and community development.
+> This is a descriptive data analysis project. It does not determine wrongdoing, evaluate political decisions, or assess the engineering effectiveness of individual projects. The goal is to make project spending patterns easier to explore and discuss using data visualization.
 
----
-## Why This Project Matters
+## Tableau Public Dashboard
 
-Flooding affects millions of Filipinos every year and often becomes a topic of public discussion, especially during typhoon season.
+View the interactive dashboard on Tableau Public:
 
-While flood control projects receive substantial government funding, project information is typically scattered across large datasets that are difficult for the public to interpret.
+[DPWH Flood Control Projects in the Philippines](https://public.tableau.com/app/profile/nicanor.jr.peril/viz/flood_control_project/Dashboard6?publish=yes)
 
-This project helps answer questions such as:
+![Tableau Public dashboard preview](images/Dashboard%206.png)
 
-* Where are flood control investments concentrated?
-* Which regions receive the largest share of funding?
-* Which provinces have the most projects?
-* Are projects evenly distributed across the country?
-* Which contractors receive the largest contracts?
+## Project Objectives
 
-By visualizing the data, citizens can better understand how public infrastructure investments are allocated nationwide.
+- Clean and prepare raw DPWH flood control project data for analysis.
+- Summarize national, regional, provincial, and contractor-level spending patterns.
+- Build visual dashboards that make infrastructure allocation easier to understand.
+- Create a Tableau Story that guides viewers through the analysis in a clear narrative sequence.
+- Present insights in a format suitable for recruiters, hiring managers, and data analytics reviewers.
 
----
+## Key Questions
+
+- How much funding has been allocated to flood control projects nationwide?
+- Which regions and provinces receive the largest approved budgets?
+- Where are flood control projects most concentrated?
+- What types of flood control work dominate the project portfolio?
+- How does project count compare with total funding and average project cost?
+- Which patterns stand out for funding concentration and regional differences?
+
 ## Dataset
 
-Source: Kaggle ([DPWH Flood Control Projects](https://www.kaggle.com/datasets/bwandowando/dpwh-flood-control-projects))
+Source: [DPWH Flood Control Projects on Kaggle](https://www.kaggle.com/datasets/bwandowando/dpwh-flood-control-projects)
+
+The repository includes both the raw dataset and the cleaned dataset used for Tableau visualization.
+
+| File | Description |
+| --- | --- |
+| `data/dpwh_flood_control_projects_raw.csv` | Original raw project dataset |
+| `data/dpwh_flood_control_projects_clean.csv` | Cleaned dataset exported from the Jupyter notebook |
 
 ### Dataset Summary
+
 | Metric | Value |
-|---------|---------|
-| Total Projects | 9,827 |
-| Total Budget | ₱549.98 Billion |
-| Total Contract Cost | ₱545.64 Billion |
-| Average Project Cost | ₱55.37 Million |
-| Regions Covered | All Philippine Regions |
+| --- | ---: |
+| Records | 9,855 |
+| Columns | 22 |
+| Funding years | 2018-2025 |
+| Regions covered | 16 |
+| Provinces covered | 84 |
+| Unique contractors | 2,409 |
+| Total approved budget | ₱549.98B |
+| Total contract cost | ₱545.64B |
+| Average contract cost | ₱55.52M |
 
 ### Key Fields
-* Region
-* Province
-* Municipality
-* Project Name
-* Project Type
-* Approved Budget for Contract
-* Contract Cost
-* Contractor
-* Start Date
-* Actual Completion Date
-* Geographic Coordinates
 
----
-## Data Cleaning Process
-Data preparation was performed in Python using Pandas.
+- `Region`, `Province`, `Municipality`, and `MainIsland`
+- `ProjectName`, `TypeOfWork`, `ProjectId`, and `ContractId`
+- `FundingYear`, `StartDate`, and `ActualCompletionDate`
+- `ApprovedBudgetForContract` and `ContractCost`
+- `Contractor` and `ContractorCount`
+- Project and provincial capital latitude/longitude fields
 
-### Cleaning Steps:
-* Inspected dataset structure and data types
-* Validated missing values
-* Converted funding columns to numeric format
-* Converted project dates into datetime format
-* Reviewed duplicate records
-* Created a cleaned dataset for visualization
+## Data Cleaning
 
-### Data Quality Findings: 
-* The dataset contains 22 columns and 9,855 records.
-* Missing values were primarily found in the Municipality field.
-* No duplicate records were identified.
-* A small number of funding records could not be converted to numeric format and were retained as missing values to preserve data integrity.
+Data preparation was completed in Python using the notebook:
 
----
-## Dashboard Preview
-![Flood Control Dashboard](images/Flood_Control_Projects_Ph.png)
-View in [Tableau Public](https://public.tableau.com/app/profile/nicanor.jr.peril/viz/FloodControlProjectsinthePhilippines/Dashboard2?publish=yes)
+`notebooks/data_cleaning.ipynb`
 
----
-## Dashboard Overview
-The Tableau dashboard provides a nationwide view of flood control investments.
+Main cleaning steps:
 
-### Dashboard Components
+- Loaded and inspected the raw CSV dataset.
+- Reviewed column types, missing values, descriptive statistics, and duplicate records.
+- Converted `ApprovedBudgetForContract` and `ContractCost` from text/object fields into numeric values.
+- Converted `StartDate` and `ActualCompletionDate` into datetime fields.
+- Preserved missing municipality values instead of imputing location-specific information.
+- Exported the cleaned dataset to `data/dpwh_flood_control_projects_clean.csv`.
 
-**KPI Summary**
-* Total Budget
-* Total Contract Cost
-* Total Project Count
-* Average Project Cost
+Data quality notes:
 
-**Budget per Region**
-Compares approved budgets across Philippine regions.
+- The cleaned dataset contains 9,855 records and 22 columns.
+- No duplicate rows were found during the notebook review.
+- `Municipality` contains missing values for 666 records.
+- Some budget/cost values could not be converted cleanly because of non-standard entries, including MYCA-related records; these were retained as missing values rather than forced into inaccurate numbers.
 
-Key Finding:
-* Region III received the largest allocation at approximately ₱99B.
-* Region IX received the smallest allocation at approximately ₱6B.
+## Tableau Workbook and Story
 
-**Number of Projects by Province**
-Interactive map showing project concentration across the country.
+The Tableau work is stored as a packaged workbook:
 
-Key Finding:
-* NCR recorded the highest number of projects (1,057).
-* Sulu recorded the fewest projects (3).
+`tableau/flood_control_project.twbx`
 
-**Top 10 Contractors**
-Ranks contractors by total contract value.
+The project is also published on Tableau Public:
 
-Key Finding:
-* Legacy Construction Corporation received the highest total contract value at approximately ₱8.27B.
+[https://public.tableau.com/app/profile/nicanor.jr.peril/viz/flood_control_project/Dashboard6?publish=yes](https://public.tableau.com/app/profile/nicanor.jr.peril/viz/flood_control_project/Dashboard6?publish=yes)
 
-**Budget Share per Region**
-Displays each region’s percentage share of total approved funding.
+The workbook includes multiple worksheets, dashboards, and a five-part Tableau Story:
 
-**Average Project Cost per Region**
-Treemap highlighting regional differences in average project costs.
+1. **Why should we care?**
 
-Key Finding:
-* Region XIII recorded the highest average project cost at approximately ₱79.59M per project.
+   Introduces the public relevance of flood control spending and shows national-level KPI context.
 
----
+2. **Following the money**
+
+   Explores regional funding share, average project cost by region, and project cost distribution.
+
+3. **Where are projects being built?**
+
+   Compares project counts by region and breaks down projects by type of work.
+
+4. **Funding efficiency: volume vs. investment**
+
+   Uses a bubble/scatter view to compare number of projects, total funding, and average project cost by region.
+
+5. **Key takeaways**
+
+   Summarizes the major patterns from the analysis in a presentation-ready closing page.
+
+## Exported Story Pages
+
+| Story page | Preview |
+| --- | --- |
+| Why should we care? | ![Why should we care](images/Story%201.png) |
+| Following the money | ![Following the money](images/Story%201-2.png) |
+| Where are projects being built? | ![Where are projects being built](images/Story%201-3.png) |
+| Funding efficiency | ![Funding efficiency](images/Story%201-4.png) |
+| Key takeaways | ![Key takeaways](images/Story%201-5.png) |
+
+## Analysis Highlights
+
+- Flood control projects in the dataset represent approximately **₱550B in approved budget** and **₱545.64B in contract cost**.
+- **Region III** has the largest total approved budget and the highest project count, making it the clearest investment hotspot in the analysis.
+- Funding is concentrated in a small set of high-investment provinces, led by **Metro Manila**, **Bulacan**, and **Cebu**.
+- **Flood mitigation structures** are the dominant project type, accounting for the majority of records in the dataset.
+- Average project cost varies meaningfully by region, with some regions receiving fewer projects but showing higher average investment per project.
+- The Tableau Story frames these findings as a guided narrative instead of a standalone dashboard, making the project easier to present and review.
+
 ## Tools Used
 
-Data Preparation
-* Python
-* Pandas
-* Jupyter Notebook
+- **Python**: data cleaning and validation
+- **Jupyter Notebook**: documented data preparation workflow
+- **Tableau**: dashboard development and Tableau Story creation
+- **CSV**: raw and cleaned dataset storage
+- **Git / GitHub**: version control and project publishing
 
-Visualization
-* Tableau Public
-
-Version Control
-* Git
-* GitHub
-
----
 ## Repository Structure
-```
+
+```text
 flood-control-projects-ph/
-│
 ├── data/
 │   ├── dpwh_flood_control_projects_raw.csv
 │   └── dpwh_flood_control_projects_clean.csv
-│
+├── images/
+│   ├── Dashboard 6.png
+│   ├── Story 1.png
+│   ├── Story 1-2.png
+│   ├── Story 1-3.png
+│   ├── Story 1-4.png
+│   └── Story 1-5.png
 ├── notebooks/
 │   └── data_cleaning.ipynb
-│
 ├── tableau/
-│   └── Flood_Control_Projects_Ph.twbx
-│
-├── images/
-│   └── Flood_Control_Projects_Ph_preview.png
-│
+│   └── flood_control_project.twbx
 └── README.md
 ```
 
----
-## Key Insights
-* Nearly ₱550 billion has been allocated to flood control projects nationwide.
-* Funding distribution varies significantly across regions.
-* NCR contains the highest concentration of projects.
-* A relatively small group of contractors accounts for several billion pesos in awarded contracts.
-* Average project costs differ considerably between regions, indicating differences in project scale and scope.
+## How to Explore the Project
+
+1. Review the cleaned dataset in `data/dpwh_flood_control_projects_clean.csv`.
+2. Open `notebooks/data_cleaning.ipynb` to see the data preparation process.
+3. Open `tableau/flood_control_project.twbx` in Tableau to explore the workbook, dashboards, and Story.
+4. View the published version on [Tableau Public](https://public.tableau.com/app/profile/nicanor.jr.peril/viz/flood_control_project/Dashboard6?publish=yes).
+5. View `images/Dashboard 6.png` and the exported Story screenshots in the `images/` folder for a quick presentation-style walkthrough.
+
+## Notes and Limitations
+
+- The analysis depends on the completeness and accuracy of the source dataset.
+- Missing municipality values were not filled because doing so could introduce incorrect location assumptions.
+- The project analyzes allocation and project-record patterns only; it does not measure real-world flood reduction outcomes.
+- Findings should be interpreted as exploratory and descriptive, not as proof of causation or project performance.
